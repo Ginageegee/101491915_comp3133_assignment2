@@ -1,0 +1,8 @@
+<h2>Employees</h2>
+
+<div *ngFor="let emp of employees" class="employee-card">
+  <p><strong>{{ emp.first_name }} {{ emp.last_name }}</strong></p>
+  <p>{{ emp.email }}</p>
+  <p>{{ emp.designation }} - {{ emp.department }}</p>
+  <p>Salary: ${{ emp.salary }}</p>
+</div>
