@@ -12,6 +12,7 @@ export const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'employee/add', component: EmployeeFormComponent },
 
   { path: 'employees', component: EmployeeListComponent },
   { path: 'employees/new', component: EmployeeFormComponent },

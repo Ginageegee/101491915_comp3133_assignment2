@@ -1,1 +1,82 @@
-<p>employee-form works!</p>
+<h2>Add New Employee</h2>
+
+<form (ngSubmit)="submit()">
+
+  <label>First Name</label>
+  <input
+    type="text"
+    [(ngModel)]="first_name"
+    name="first_name"
+    required
+  >
+
+  <label>Last Name</label>
+  <input
+    type="text"
+    [(ngModel)]="last_name"
+    name="last_name"
+    required
+  >
+
+  <label>Email</label>
+  <input
+    type="email"
+    [(ngModel)]="email"
+    name="email"
+    required
+  >
+
+  <label>Gender</label>
+  <select [(ngModel)]="gender" name="gender">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Designation</label>
+  <input
+    type="text"
+    [(ngModel)]="designation"
+    name="designation"
+    required
+  >
+
+  <label>Salary</label>
+  <input
+    type="number"
+    [(ngModel)]="salary"
+    name="salary"
+    required
+  >
+
+  <label>Date of Joining</label>
+  <input
+    type="date"
+    [(ngModel)]="date_of_joining"
+    name="date_of_joining"
+    required
+  >
+
+  <label>Department</label>
+  <input
+    type="text"
+    [(ngModel)]="department"
+    name="department"
+    required
+  >
+
+  <label>Employee Photo</label>
+  <input type="file" (change)="onFileChange($event)">
+
+  <br><br>
+
+  <button type="submit" [disabled]="loading">
+    {{ loading ? 'Saving...' : 'Save Employee' }}
+  </button>
+
+  <!-- Success / Error Messages -->
+  <p *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+    {{ errorMessage }}
+  </p>
+
+</form>

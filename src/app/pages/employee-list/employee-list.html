@@ -1,8 +1,54 @@
-<h2>Employees</h2>
+<h2>Employee List</h2>
 
-<div *ngFor="let emp of employees" class="employee-card">
-  <p><strong>{{ emp.first_name }} {{ emp.last_name }}</strong></p>
-  <p>{{ emp.email }}</p>
-  <p>{{ emp.designation }} - {{ emp.department }}</p>
-  <p>Salary: ${{ emp.salary }}</p>
-</div>
+<button routerLink="/employee/add">Add Employee</button>
+
+<p *ngIf="loading">Loading employees...</p>
+<p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+<table
+  *ngIf="!loading && employees.length > 0"
+  style="border: 1px solid #ccc; width: 100%; border-collapse: collapse; margin-top: 20px;"
+>
+  <tr style="background: #f0f0f0;">
+    <th style="padding: 8px; border: 1px solid #ccc;">Photo</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Name</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Email</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Salary</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Actions</th>
+  </tr>
+
+  <tr *ngFor="let emp of employees">
+    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">
+      <img
+        *ngIf="emp.employee_photo"
+        [src]="emp.employee_photo"
+        alt="Employee photo"
+        width="50"
+        height="50"
+        style="border-radius: 50%; object-fit: cover;"
+      />
+    </td>
+
+    <td style="padding: 8px; border: 1px solid #ccc;">
+      {{ emp.first_name }} {{ emp.last_name }}
+    </td>
+
+    <td style="padding: 8px; border: 1px solid #ccc;">
+      {{ emp.email }}
+    </td>
+
+    <td style="padding: 8px; border: 1px solid #ccc;">
+      {{ emp.salary }}
+    </td>
+
+    <td style="padding: 8px; border: 1px solid #ccc;">
+      <button [routerLink]="['/employee', emp._id]">View</button>
+      <button [routerLink]="['/employees', emp._id, 'edit']">Edit</button>
+      <button (click)="deleteEmployee(emp._id)">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<p *ngIf="!loading && employees.length === 0 && !errorMessage">
+  No employees found.
+</p>
