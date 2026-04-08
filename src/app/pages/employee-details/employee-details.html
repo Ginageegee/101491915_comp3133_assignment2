@@ -1,0 +1,31 @@
+<h2>Employee Details</h2>
+
+<p *ngIf="loading">Loading employee details...</p>
+<p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+<div *ngIf="!loading && employee" style="border: 1px solid #ccc; padding: 20px; max-width: 600px;">
+  <div style="margin-bottom: 20px; text-align: center;">
+    <img
+      *ngIf="employee.employee_photo"
+      [src]="employee.employee_photo"
+      alt="Employee photo"
+      width="120"
+      height="120"
+      style="border-radius: 50%; object-fit: cover; border: 1px solid #ccc;"
+    />
+  </div>
+
+  <p><strong>First Name:</strong> {{ employee.first_name }}</p>
+  <p><strong>Last Name:</strong> {{ employee.last_name }}</p>
+  <p><strong>Email:</strong> {{ employee.email }}</p>
+  <p><strong>Gender:</strong> {{ employee.gender }}</p>
+  <p><strong>Designation:</strong> {{ employee.designation }}</p>
+  <p><strong>Salary:</strong> {{ employee.salary }}</p>
+  <p><strong>Date of Joining:</strong> {{ employee.date_of_joining | date:'yyyy-MM-dd' }}</p>
+  <p><strong>Department:</strong> {{ employee.department }}</p>
+
+  <br>
+
+  <button routerLink="/employees">Back to Employee List</button>
+  <button [routerLink]="['/employees', employee._id, 'edit']">Edit Employee</button>
+</div>

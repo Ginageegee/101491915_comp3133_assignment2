@@ -6,6 +6,7 @@ import { SignupComponent } from './pages/signup/signup';
 import { EmployeeListComponent } from './pages/employee-list/employee-list';
 import { EmployeeFormComponent } from './pages/employee-form/employee-form';
 
+import { EmployeeDetailsComponent } from './pages/employee-details/employee-details';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'employee/add', component: EmployeeFormComponent },
 
   { path: 'employees', component: EmployeeListComponent },
+  { path: 'employee/:id', component: EmployeeDetailsComponent },
   { path: 'employees/new', component: EmployeeFormComponent },
   { path: 'employees/:id/edit', component: EmployeeFormComponent },
 
