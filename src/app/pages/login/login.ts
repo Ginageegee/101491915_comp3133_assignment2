@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
-
   username = '';
   password = '';
 
@@ -23,8 +22,11 @@ export class LoginComponent {
     console.log('Login clicked');
 
     const query = `
-      mutation Login($input: LoginInput!) {
-        login(input: $input) {
+      mutation {
+        login(input: {
+          username: "${this.username}",
+          password: "${this.password}"
+        }) {
           token
           user {
             _id
@@ -34,16 +36,15 @@ export class LoginComponent {
       }
     `;
 
-    const variables = {
-      input: {
-        username: this.username,
-        password: this.password
-      }
-    };
-
-    this.http.post(this.apiUrl, { query, variables }).subscribe({
+    this.http.post(this.apiUrl, { query }).subscribe({
       next: (res: any) => {
         console.log('Login response:', res);
+
+        if (res.errors && res.errors.length > 0) {
+          console.error('Login failed:', res.errors);
+          alert(res.errors[0].message || 'Invalid username or password');
+          return;
+        }
 
         const token = res.data?.login?.token;
 
