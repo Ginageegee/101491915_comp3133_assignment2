@@ -52,7 +52,6 @@ export class LoginComponent {
           localStorage.setItem('token', token);
           this.router.navigate(['/employees']);
         } else {
-          console.error('Login failed:', res);
           alert('Invalid username or password');
         }
       },
