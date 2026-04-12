@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
-  apiUrl = 'http://localhost:4000/graphql';
+  apiUrl = 'https://comp3133-101491915-assignment1.onrender.com/graphql';
   errorMessage = '';
   loading = false;
 

@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./employee-form.css']
 })
 export class EmployeeFormComponent implements OnInit {
-  apiUrl = 'http://localhost:4000/graphql';
+  apiUrl = 'https://comp3133-101491915-assignment1.onrender.com/graphql';
 
   first_name = '';
   last_name = '';

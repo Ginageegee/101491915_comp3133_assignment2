@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   styleUrls: ['./employee-details.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-  apiUrl = 'http://localhost:4000/graphql';
+  apiUrl = 'https://comp3133-101491915-assignment1.onrender.com/graphql';
 
   employee: any = null;
   loading = false;

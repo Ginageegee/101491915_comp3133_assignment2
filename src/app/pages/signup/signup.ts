@@ -16,7 +16,7 @@ export class SignupComponent {
   email = '';
   password = '';
 
-  private apiUrl = 'http://localhost:4000/graphql';
+  private apiUrl = 'https://comp3133-101491915-assignment1.onrender.com/graphql';
 
   constructor(private http: HttpClient, private router: Router) {}
 
