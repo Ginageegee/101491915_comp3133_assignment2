@@ -22,11 +22,8 @@ export class LoginComponent {
     console.log('Login clicked');
 
     const query = `
-      mutation {
-        login(input: {
-          username: "${this.username}",
-          password: "${this.password}"
-        }) {
+      query Login($input: LoginInput!) {
+        login(input: $input) {
           token
           user {
             _id
@@ -36,7 +33,14 @@ export class LoginComponent {
       }
     `;
 
-    this.http.post(this.apiUrl, { query }).subscribe({
+    const variables = {
+      input: {
+        username: this.username,
+        password: this.password
+      }
+    };
+
+    this.http.post(this.apiUrl, { query, variables }).subscribe({
       next: (res: any) => {
         console.log('Login response:', res);
 
