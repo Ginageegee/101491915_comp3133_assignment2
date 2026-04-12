@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./signup.css']
 })
 export class SignupComponent {
-
   username = '';
   email = '';
   password = '';
@@ -22,12 +21,8 @@ export class SignupComponent {
 
   signup() {
     const query = `
-      mutation {
-        signup(input: {
-          username: "${this.username}",
-          email: "${this.email}",
-          password: "${this.password}"
-        }) {
+      mutation Signup($input: SignupInput!) {
+        signup(input: $input) {
           _id
           username
           email
@@ -35,13 +30,28 @@ export class SignupComponent {
       }
     `;
 
-    this.http.post(this.apiUrl, { query }).subscribe({
+    const variables = {
+      input: {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+    };
+
+    this.http.post(this.apiUrl, { query, variables }).subscribe({
       next: (res: any) => {
         console.log('Signup success:', res);
-        this.router.navigate(['/login']);
+
+        if (res.data?.signup?._id) {
+          this.router.navigate(['/login']);
+        } else {
+          console.error('Signup failed:', res);
+          alert('Signup failed. Please try again.');
+        }
       },
       error: (err) => {
         console.error('Signup error:', err);
+        alert('Signup failed. Please try again.');
       }
     });
   }

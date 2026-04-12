@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -23,21 +23,20 @@ export class LoginComponent {
     console.log('Login clicked');
 
     const query = `
-    query Login($input: LoginInput!) {
-      login(input: $input) {
-        token
-        user {
-          _id
-          username
+      mutation Login($input: LoginInput!) {
+        login(input: $input) {
+          token
+          user {
+            _id
+            username
+          }
         }
       }
-    }
-  `;
+    `;
 
     const variables = {
       input: {
         username: this.username,
-        email: null,
         password: this.password
       }
     };
@@ -53,12 +52,13 @@ export class LoginComponent {
           this.router.navigate(['/employees']);
         } else {
           console.error('Login failed:', res);
+          alert('Invalid username or password');
         }
       },
       error: (err) => {
         console.error('Login error:', err);
+        alert('Login failed. Please try again.');
       }
     });
   }
-
 }
