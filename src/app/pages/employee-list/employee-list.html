@@ -1,6 +1,27 @@
+<button (click)="logout()">Logout</button>
+
 <h2>Employee List</h2>
 
-<button routerLink="/employee/add">Add Employee</button>
+<h3>Search Employees</h3>
+
+<input
+  type="text"
+  [(ngModel)]="searchDepartment"
+  name="searchDepartment"
+  placeholder="Search by department"
+/>
+
+<input
+  type="text"
+  [(ngModel)]="searchDesignation"
+  name="searchDesignation"
+  placeholder="Search by designation"
+/>
+
+<button (click)="search()">Search</button>
+<button (click)="loadEmployees()">Reset</button>
+
+
 
 <p *ngIf="loading">Loading employees...</p>
 <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
@@ -48,7 +69,7 @@
     </td>
   </tr>
 </table>
-
+<button routerLink="/employee/add">Add Employee</button>
 <p *ngIf="!loading && employees.length === 0 && !errorMessage">
   No employees found.
 </p>

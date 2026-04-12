@@ -1,30 +1,14 @@
-<h2>Add New Employee</h2>
+<h2>{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
 
 <form (ngSubmit)="submit()">
-
   <label>First Name</label>
-  <input
-    type="text"
-    [(ngModel)]="first_name"
-    name="first_name"
-    required
-  >
+  <input type="text" [(ngModel)]="first_name" name="first_name" required>
 
   <label>Last Name</label>
-  <input
-    type="text"
-    [(ngModel)]="last_name"
-    name="last_name"
-    required
-  >
+  <input type="text" [(ngModel)]="last_name" name="last_name" required>
 
   <label>Email</label>
-  <input
-    type="email"
-    [(ngModel)]="email"
-    name="email"
-    required
-  >
+  <input type="email" [(ngModel)]="email" name="email" required>
 
   <label>Gender</label>
   <select [(ngModel)]="gender" name="gender">
@@ -34,49 +18,33 @@
   </select>
 
   <label>Designation</label>
-  <input
-    type="text"
-    [(ngModel)]="designation"
-    name="designation"
-    required
-  >
+  <input type="text" [(ngModel)]="designation" name="designation" required>
 
   <label>Salary</label>
-  <input
-    type="number"
-    [(ngModel)]="salary"
-    name="salary"
-    required
-  >
+  <input type="number" [(ngModel)]="salary" name="salary" required>
 
   <label>Date of Joining</label>
-  <input
-    type="date"
-    [(ngModel)]="date_of_joining"
-    name="date_of_joining"
-    required
-  >
+  <input type="date" [(ngModel)]="date_of_joining" name="date_of_joining" required>
 
   <label>Department</label>
-  <input
-    type="text"
-    [(ngModel)]="department"
-    name="department"
-    required
-  >
+  <input type="text" [(ngModel)]="department" name="department" required>
 
-  <label>Employee Photo</label>
+  <label>Employee Photo (optional)</label>
   <input type="file" (change)="onFileChange($event)">
+
+  <p style="color: #666;">
+    Photo upload is temporarily disabled to avoid large request errors.
+  </p>
 
   <br><br>
 
   <button type="submit" [disabled]="loading">
-    {{ loading ? 'Saving...' : 'Save Employee' }}
+    {{ loading ? (isEditMode ? 'Updating...' : 'Saving...') : (isEditMode ? 'Update Employee' : 'Save Employee') }}
   </button>
 
-  <!-- Success / Error Messages -->
+  <button type="button" routerLink="/employees">Cancel</button>
+
   <p *ngIf="errorMessage" style="color: red; margin-top: 10px;">
     {{ errorMessage }}
   </p>
-
 </form>
